@@ -75,9 +75,7 @@ $header_logo  = $this->frontend_model->get_frontend_general_settings('header_log
                                 </div>
                             </div>
 
-                            <form action="backend/institute_signup">
-                                <input type="submit" value="Go to Google" />
-                            </form>
+                            
                         </div>
 
                         <div class="login-fancy pb-40 clearfix" id="forgot_password_area" style="display: none;">
