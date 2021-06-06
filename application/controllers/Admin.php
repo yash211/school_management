@@ -2241,7 +2241,7 @@ class Admin extends CI_Controller
             $this->db->insert('book', $data);
 
             if (!empty($_FILES["file_name"]["name"])) {
-                move_uploaded_file($_FILES["file_name"]["tmp_name"], "uploads/document/" . $_FILES["file_name"]["name"]);
+                 move_uploaded_file($_FILES["file_name"]["tmp_name"], "uploads/document/" . $_FILES["file_name"]["name"]);
             }
 
             $this->session->set_flashdata('flash_message', get_phrase('data_added_successfully'));

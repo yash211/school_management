@@ -32,7 +32,7 @@ $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER
 |
 */
 $config['index_page'] = 'index.php';
-//$config['index_page'] = '';
+//$config['index_page'] = 'Login_resume.php';
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL

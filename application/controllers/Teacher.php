@@ -39,10 +39,20 @@ class Teacher extends CI_Controller
     /***TEACHER DASHBOARD***/
     function dashboard()
     {
-        if ($this->session->userdata('teacher_login') != 1)
+        if ($this->session->userdata('teacher_login') != 1 )
             redirect(base_url(), 'refresh');
         $page_data['page_name']  = 'dashboard';
         $page_data['page_title'] = get_phrase('teacher_dashboard');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    function etutordashboard()
+    {
+        //echo $this->session->userdata('etut_login');
+        if ($this->session->userdata('etut_login') != 1 )
+            redirect(base_url(), 'refresh');
+        $page_data['page_name']  = 'dashboard';
+        $page_data['page_title'] = get_phrase('etutor_dashboard');
         $this->load->view('backend/index', $page_data);
     }
 
@@ -150,7 +160,7 @@ class Teacher extends CI_Controller
     {
         if ($this->session->userdata('teacher_login') != 1)
             redirect(base_url(), 'refresh');
-        if ($param1 == 'create') {
+        if ($param1 == 'create'){
             $data['name']       = html_escape($this->input->post('name'));
             $data['class_id']   = $this->input->post('class_id');
 

@@ -391,6 +391,14 @@
         </li> -->
 
         <!-- ACCOUNTING -->
+        <li>
+           <a href="index.php">
+           <span><i class="entypo-dot"></i>E_tutor</span>
+        </li>
+        <!--<li>
+           <a href="E-commerce/login.php">
+           <span><i class="entypo-dot"></i>E_Commerce</span>
+        </li>-->
         <li class="<?php
                     if (
                         $page_name == 'income' ||

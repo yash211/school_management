@@ -37,9 +37,8 @@
            	<i class="entypo-right-circled"></i>
 				<?php echo $page_title;?>
            </h3>
-
 			<?php include $account_type.'/'.$page_name.'.php';?>
-
+          
 			<?php include 'footer.php';?>
 
 		</div>

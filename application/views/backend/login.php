@@ -66,6 +66,12 @@ $header_logo  = $this->frontend_model->get_frontend_general_settings('header_log
                                 <button type="submit" class="btn btn-primary"><?php echo get_phrase('login'); ?></button>
                             </form>
 
+                            <li>
+                                <a href="<?php echo site_url('login/createlog'); ?>">
+                                    <span>Log in:Etutor</span>
+                                </a>
+                            </li>
+
                             <div class="section-field">
                                 <div class="remember-checkbox mb-30">
                                     <a href="#" class="float-right" id="forgot_password_button" onclick="toggleView(this)"><?php echo get_phrase('forgot_password'); ?>?</a>
@@ -75,7 +81,7 @@ $header_logo  = $this->frontend_model->get_frontend_general_settings('header_log
                                 </div>
                             </div>
 
-                            
+
                         </div>
 
                         <div class="login-fancy pb-40 clearfix" id="forgot_password_area" style="display: none;">
@@ -95,6 +101,7 @@ $header_logo  = $this->frontend_model->get_frontend_general_settings('header_log
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>

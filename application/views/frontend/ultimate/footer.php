@@ -53,7 +53,7 @@ $links = json_decode($social);
           <li><a class="list-group-item list-group-item-action" 
             href="<?php echo site_url('home/privacy_policy');?>">Privacy Policy</a></li>
           <li><a class="list-group-item list-group-item-action" target="_blank"
-            href="<?php echo site_url('login');?>">Login</a></li>
+            href="<?php echo site_url('superadmin');?>">Admin Login</a></li>
         </ul>
         <!-- End List Group -->
       </div>

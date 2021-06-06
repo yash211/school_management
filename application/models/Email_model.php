@@ -69,6 +69,21 @@ class Email_model extends CI_Model {
     	$this->send_smtp_mail($email_message, $email_sub, $email_to);
     }
 
+	function send_code($name){
+		echo $name;
+		//$des = $this->db->get_where('settings', array('type' => $type))->row()->description;
+		$class_code = $this->db->get_where('etutor_class', array('class_name' => $name))->row()->class_code;
+		echo $class_code;
+		$teacher_mail=$this->db->get_where('etutor')->row('email');
+		echo $teacher_mail;
+		$class_id=$this->db->get_where('etutor_class',array("class_name" => $name))->row('class_id');
+		$students = $this->db->get_where('etutor_student',array('class_name' => $class_id))->row()->email;
+		echo $students;
+        $emessage="Your Class Code is ".$class_code;
+		$esubject="Class Code";
+		$this->send_smtp_mail($emessage,$esubject,$students,$teacher_mail);
+	}
+
     // more stable function
 	public function send_smtp_mail($msg=NULL, $sub=NULL, $to=NULL, $from=NULL) {
 		//Load email library
@@ -80,15 +95,15 @@ class Email_model extends CI_Model {
 
 		//SMTP & mail configuration
 		$config = array(
-			'protocol'  => get_settings('protocol'),
-			'smtp_host' => get_settings('smtp_host'),
-			'smtp_port' => get_settings('smtp_port'),
+			'protocol'  => 'sendmail',
+			'smtp_host' => 'localhost',
+			'smtp_port' => 465,
 			'smtp_user' => get_settings('smtp_user'),
 			'smtp_pass' => get_settings('smtp_pass'),
 			'mailtype'  => 'html',
 			'charset'   => 'utf-8',
 			'smtp_timeout' => '30',
-			'mailpath' => '/usr/sbin/sendmail',
+			'mailpath' => 'C:\wamp\sendmail\sendmail.exe -t -i',
 			'wordwrap' => TRUE
 		);
 		$this->email->initialize($config);

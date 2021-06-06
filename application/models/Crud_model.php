@@ -21,6 +21,19 @@ class Crud_model extends CI_Model {
 
     }
 
+    //Ecom users
+    function get_ecom_user($email){
+        $query=$this->db->get_where('ecom_usignup',array('email' => $email));
+        if($query->num_rows()>0){
+            return -1; 
+        }else{
+            return 0;
+        }
+    }
+    function insert_ecomuser($data){
+        $this->db->insert('ecom_usignup',$data);
+    }
+
     ////////STUDENT/////////////
     function get_students($class_id) {
         $query = $this->db->get_where('student', array('class_id' => $class_id));
