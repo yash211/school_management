@@ -19,7 +19,7 @@ class Etutor extends CI_Controller
     /***default functin, redirects to login page if no teacher logged in yet***/
     public function index()
     {
-        if ($this->session->userdata('etutor_login') != 1)
+        if ($this->session->userdata('is_login') != 1)
             redirect(site_url('login'), 'refresh');
         if ($this->session->userdata('etutor_login') == 1)
             redirect(site_url('etutor/dashboard'), 'refresh');
@@ -29,27 +29,27 @@ class Etutor extends CI_Controller
     public function dashboard()
     {
         //echo $this->session->userdata('etut_login');
-        if ($this->session->userdata('etut_login') != 1)
-            redirect(base_url(), 'refresh');
+        if ($this->session->userdata('is_login') =="")
+            redirect(site_url('login'), 'refresh');
         $page_data['page_name']  = 'dashboard';
         $page_data['page_title'] = get_phrase('etutor_dashboard');
-        $this->load->view('backend/index', $page_data);
+        //$this->load->view('backend/index', $page_data);
+        $this->load->view('backend/super_admin/etutor/dashboard.php');
     }
 
     public function viewclasses()
     {
-        if ($this->session->userdata('etut_login') != 1)
-            redirect(base_url(), 'refresh');
-
+        if ($this->session->userdata('is_login') =="")
+            redirect(site_url('login'), 'refresh');
         $page_data['page_name']  = 'add_class';
         $page_data['page_title'] = get_phrase('add class');
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/super_admin/etutor/add_class', $page_data);
     }
 
     public function addclass($param = "")
     {
-        if ($this->session->userdata('etut_login') != 1)
-            redirect(base_url(), 'refresh');
+        if ($this->session->userdata('is_login') == "")
+            redirect(site_url('login'), 'refresh');
         if ($param == "create") {
             $data['class_name'] = $this->input->post('name');
             $data['class_code'] = $this->input->post('code');
@@ -59,19 +59,21 @@ class Etutor extends CI_Controller
         }
         $page_data['page_name']  = 'add_class';
         $page_data['page_title'] = get_phrase('add class');
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/super_admin/etutor/add_class');
     }
 
     function viewstudents()
     {
+        if ($this->session->userdata('is_login') == "")
+            redirect(site_url('login'), 'refresh');
         $page_data['page_name']  = 'student_add';
         $page_data['page_title'] = get_phrase('Add Students');
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/super_admin/etutor/student_add');
     }
 
     function student($param1 = '')
     {
-        if ($this->session->userdata('etut_login') != 1)
+        if ($this->session->userdata('is_login') == "")
             redirect(site_url('login'), 'refresh');
 
 
@@ -91,7 +93,7 @@ class Etutor extends CI_Controller
         //$this->load->view('backend/etutor/student_add');
         $page_data['page_name']  = 'student_add';
         $page_data['page_title'] = get_phrase('Add Students');
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/super_admin/etutor/student_add');
 
         if ($param1 == 'do_update') {
             $data['name']           = html_escape($this->input->post('name'));
@@ -103,32 +105,38 @@ class Etutor extends CI_Controller
     function viewmanageclass()
     {
         //$this->load->view('backend/etutor/manage_class');
+        if ($this->session->userdata('is_login') == "")
+            redirect(site_url('login'), 'refresh');
         $page_data['page_name']  = 'manage_class';
         $page_data['page_title'] = get_phrase('manage class');
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/super_admin/etutor/manage_class');
     }
 
     function manageclasses()
     {
+        if ($this->session->userdata('is_login') == "")
+            redirect(site_url('login'), 'refresh');
         $data['class_name'] = $this->input->post('class');
         //$class_code=$this->db->get_where('etutor_class',array("class_name",$data['class_name']))->row('class_code');
         $this->email_model->send_code($data['class_name']);
         //$this->load->view('backend/etutor/dashboard');
         $page_data['page_name']  = 'manage_class';
         $page_data['page_title'] = get_phrase('manage class');
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/super_admin/etutor/manage_class.php');
     }
 
     function viewsubject()
     {
+        if ($this->session->userdata('is_login') == "")
+            redirect(site_url('login'), 'refresh');
         $page_data['page_name']  = 'subject_add';
         $page_data['page_title'] = get_phrase('manage subject');
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/super_admin/etutor/subject_add');
     }
 
     function addsubjects()
     {
-        if ($this->session->userdata('etut_login') != 1)
+        if ($this->session->userdata('is_login') == "")
             redirect(site_url('login'), 'refresh');
 
         $data['name']        = html_escape($this->input->post('name'));
@@ -146,6 +154,17 @@ class Etutor extends CI_Controller
         $this->session->set_flashdata('add_subject',get_phrase('Subject_Added_Successfully'));
         $page_data['page_name']  = 'subject_add';
         $page_data['page_title'] = get_phrase('manage subject');
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/super_admin/etutor/subject_add', $page_data);
+    }
+
+    function profile(){
+        $this->load->view('backend/super_admin/etutor/profile');
+    }
+
+    function deletestudent($id){
+        $this->db->where('student_id',$id);
+        $this->db->delete('etutor_student');
+        $this->session->set_flashdata('delete_student',"Student Deleted");
+        $this->profile();
     }
 }

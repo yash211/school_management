@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class LOGIN extends CI_Controller {
+class Login_resume extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -11,10 +11,12 @@ class LOGIN extends CI_Controller {
 		$this->load->library("session");
 		$this->load->library("encryption");
 		$this->load->helper("cookie");
+		
 	}
 	
     public function verify(){
         if(isset($_POST["login"])){
+			echo $_POST["login"];
 			extract($_POST);
 			$user=$this->Login_model->getUser("username",$username);
 			$user=$user->row_array();
@@ -42,11 +44,11 @@ class LOGIN extends CI_Controller {
 					}
 					if($ret['is_fully_registered'] != 1){
 						//if user registered for first time redirect him to resume form page
-						$url = "controllers/users/FormDetails";
+						$url = "../USERS/FormDetails";
 					}	
 					else{
 						//if user already registered and filled the form then redirect it directly to resume page
-						$url = "controllers/USER_DETAILS/fetchDetailsForResume";
+						$url = "../USER_DETAILS/fetchDetailsForResume";
 					}
 						
 				}
@@ -63,7 +65,7 @@ class LOGIN extends CI_Controller {
 		else if(isset($_POST["skip_sign_in"])){
 			$_SESSION['islogin'] = FALSE;
 			$_SESSION['user_id'] = 0;
-			header("Location: controllers/users/FormDetails");
+			header("Location: ../USERS/FormDetails");
 		}
 		
 	}
@@ -100,7 +102,7 @@ class LOGIN extends CI_Controller {
 			}else{
 				$_SESSION['status']="SIGNUP_FAILURE";
 			}
-			header("Location: ");
+			header("Location: ../../");
 		}
 	}
 }

@@ -21,7 +21,7 @@
                 <a class="nav-link" href="#">Link 1</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link 2</a>
+                <a class="nav-link" href="<?php echo site_url('etutor/dashboard'); ?>">E-tutor</a>
             </li>
             
              <!-- Dropdown -->

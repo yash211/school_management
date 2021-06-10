@@ -1,10 +1,10 @@
 <?php
 class USERS extends CI_Controller{
 	public function index(){
-		$this->load->view("frontend/ultimate/index/login_resume");
+		$this->load->view("pages/login.php");
 	}
     public function FormDetails(){
-        $this->load->view("frontend/ultimate/index/form_details");
+        $this->load->view("pages/form_details");
     }
 	public function UpdateDetailsPage(){
 		$data['current_page'] = "update";

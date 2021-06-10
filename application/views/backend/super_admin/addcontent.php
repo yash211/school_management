@@ -15,7 +15,7 @@
                     <option value=""><?php echo get_phrase('select_course'); ?></option>
                     <?php
                     //$courses = $this->db->get('courses')->result_array();
-                    $con = new mysqli('localhost', 'root', '', 'e_commerce');
+                    $con = new mysqli('localhost', 'root', '', 'ecattor');
                     $squery = "SELECT  * FROM `courses` WHERE 1";
                     $r = $con->query($squery);
                     $row=[];

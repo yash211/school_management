@@ -16,6 +16,8 @@ $system_name = $this->db->get_where('settings', array('type' => 'system_name'))-
           </a>
           <!-- End Logo -->
 
+          <a href="<?php echo site_url('home/viewusersign'); ?>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Sign Up</a>
+
           <!-- Responsive Toggle Button -->
           <button type="button" class="navbar-toggler btn u-hamburger u-hamburger--white" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
             <span id="hamburgerTrigger" class="u-hamburger__box">

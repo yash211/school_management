@@ -118,11 +118,11 @@ class USER_DETAILS extends CI_Controller{
 		  
     }
 	public function fetchDetailsForResume(){
-		if($_SESSION['islogin']){
+		/*if($_SESSION['is_login']){
 			$data = $this->getDeatils();
 		}else{
 			$data = $this->data_set_elements;
-		}
+		}*/
 		$data['current_page'] = "resume";
         $this->load->view("includes/header", $data);
         $this->load->view("includes/header-bp", $data);

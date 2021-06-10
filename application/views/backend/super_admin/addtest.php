@@ -17,7 +17,7 @@
 
 <body>
     <?php
-    $con = new mysqli('localhost', 'root', '', 'e_commerce');
+    $con = new mysqli('localhost', 'root', '', 'ecattor');
     $squery = "SELECT  `name` FROM `courses` WHERE 1";
     $r = $con->query($squery);
     $row1 = [];

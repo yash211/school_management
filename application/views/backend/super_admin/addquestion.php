@@ -84,7 +84,7 @@
     ?>
     <?php echo form_open(site_url('Ecom/addquestion'), array('class' => 'form-horizontal form-groups validate', 'target' => '_top')); ?>
         <?php
-        $con = new mysqli('localhost', 'root', '', 'e_commerce');
+        $con = new mysqli('localhost', 'root', '', 'ecattor');
         $squery = "SELECT  `name` FROM `courses` WHERE 1";
         $r = $con->query($squery);
         $row = [];
