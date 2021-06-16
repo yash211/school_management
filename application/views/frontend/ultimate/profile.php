@@ -22,3 +22,31 @@
   </table>
   </div>
 </div>
+<br><br><br>
+<div class="container">
+  <h2>Your Courses</h2>
+  <div class="table-responsive">          
+  <table class="table" style="height:700">
+    <thead class="success">
+      <tr>
+        <th>Coursename</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bg-success"><?php echo get_phrase($ecourse)?></td>
+        <td class="bg-success">Completed</td>
+        <tr></tr>
+        <td class="bg-danger">Web Development</td>
+        <td class="bg-danger">Not Completed</td>
+        </tr>
+        <tr>
+        <td class="bg-success">Marketing</td>
+        <td class="bg-success">Completed</td>
+        </tr>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>

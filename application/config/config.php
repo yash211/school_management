@@ -133,7 +133,8 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = TRUE;
+require_once APPPATH.'vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -501,3 +502,4 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 $config['composer_autoload'] = 'vendor/autoload.php';
+$config['composer_autoload'] = 'vendor/twilio/autoload.php';

@@ -16,7 +16,7 @@ $system_name = $this->db->get_where('settings', array('type' => 'system_name'))-
           </a>
           <!-- End Logo -->
 
-          <a href="<?php echo site_url('home/viewusersign'); ?>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Sign Up</a>
+          <a href="<?php echo site_url('home/viewusersign'); ?>" class="btn btn-primary " role="button" aria-pressed="true">Sign Up</a>
 
           <!-- Responsive Toggle Button -->
           <button type="button" class="navbar-toggler btn u-hamburger u-hamburger--white" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
@@ -39,16 +39,6 @@ $system_name = $this->db->get_where('settings', array('type' => 'system_name'))-
             <li class="nav-item u-header__nav-item <?php if ($page_name == 'event') echo 'active'; ?>">
               <a class="nav-link u-header__nav-link " href="<?php echo site_url('home/events'); ?>">Events</a>
             </li>
-            <li class="nav-item u-header__nav-item <?php if ($page_name == 'login_resume') echo 'active'; ?>">
-              <a class="nav-link u-header__nav-link" href="<?php echo site_url('home/resume'); ?>">
-                <?php echo get_phrase('resume_maker'); ?>
-              </a>
-            </li>
-            <li class="nav-item u-header__nav-item <?php if ($page_name == 'login_resume') echo 'active'; ?>">
-              <a class="nav-link u-header__nav-link" href="<?php echo site_url('home/resume2'); ?>">
-                <?php echo get_phrase('resume_maker'); ?>
-              </a>
-            </li>
             <li class="nav-item u-header__nav-item <?php if ($page_name == 'teacher') echo 'active'; ?>">
               <a class="nav-link u-header__nav-link" href="<?php echo site_url('home/teachers'); ?>">Teachers</a>
             </li>
@@ -60,13 +50,6 @@ $system_name = $this->db->get_where('settings', array('type' => 'system_name'))-
             </li>
             <li class="nav-item u-header__nav-item <?php if ($page_name == 'contact') echo 'active'; ?>">
               <a class="nav-link u-header__nav-link" href="<?php echo site_url('home/contact'); ?>">Contact</a>
-            </li>
-            <li class="nav-item u-header__nav-item <?php if ($page_name == 'login_etutor') echo 'active'; ?>">
-              <a class="nav-link u-header__nav-link" href="<?php echo site_url('home/createlogetut'); ?>">E tutor</a>
-            </li>
-
-            <li class="nav-item u-header__nav-item <?php if ($page_name == 'ecom_login') echo 'active'; ?>">
-              <a class="nav-link u-header__nav-link" href="<?php echo site_url('home/view_ecom_login'); ?>">E Commerce</a>
             </li>
 
           </ul>

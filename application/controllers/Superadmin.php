@@ -69,4 +69,14 @@ class Superadmin extends CI_Controller
             echo "not_exist";
         }
     }
+
+    function profile($param1=""){
+        //echo $param1;
+        $query=$this->db->get($param1);
+        $page_data['data']=$query->result_array();
+        //print_r($page_data['data']);
+        $page_data['page_name']  = 'profile_modal';
+        $page_data['page_title'] = get_phrase('Profile');
+        $this->load->view('backend/super_admin/s_admin', $page_data);
+    }
 }

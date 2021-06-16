@@ -44,7 +44,7 @@ class Ecom extends CI_Controller
 
     public function addcourses()
     {
-        if ($this->session->userdata('is_login') != 1)
+        if ($this->session->userdata('is_login') == "")
             redirect(site_url('login'), 'refresh');
         //name,desc,status
         $data['name'] = $this->input->post('name');
@@ -89,7 +89,7 @@ class Ecom extends CI_Controller
 
     public function content()
     {
-        $data['course_id']    = $this->input->post('course_id');
+        /*$data['course_id']    = $this->input->post('course_id');
         if ($this->input->post('description') != null) {
             $data['description'] = html_escape($this->input->post('description'));
         }
@@ -101,8 +101,12 @@ class Ecom extends CI_Controller
 
         if (!empty($_FILES["file_name"]["name"])) {
             move_uploaded_file($_FILES["file_name"]["tmp_name"], "uploads/document/" . $_FILES["file_name"]["name"]);
-        }
-
+        }*/
+        $data['course_id']=html_escape($this->input->post('course_id'));
+        //echo $data['course_id'];
+        $data['mname']=html_escape($this->input->post('mname'));
+        $data['vlink']=html_escape($this->input->post('vlink'));
+        $this->db->insert('newecom_content',$data);
         $this->session->set_flashdata('flash_message', get_phrase('data_added_successfully'));
         $this->createcontent();
     }

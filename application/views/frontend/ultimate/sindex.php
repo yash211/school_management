@@ -85,9 +85,18 @@
 
         <!-- Links -->
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('home/viewedash'); ?>"><strong>E-Tutor</strong></a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="<?php echo site_url('home/viewedash'); ?>" id="navbardrop" data-toggle="dropdown">
+                    <strong>E-tutor</strong>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="<?php echo site_url('home/class_subject'); ?>">Your Subjects</a>
+                    <a class="dropdown-item" href="<?php echo site_url('home/viewjoinclass'); ?>">Join Class</a>
+
+                </div>
+            </li>
             <li class="nav-item"><a class="nav-link" href="<?php echo site_url('home/ecomdash'); ?>"><strong>Ecommerce</strong></a></li>
-            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('users/ThemeSelector'); ?>"><strong>Resume</strong></a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo site_url('users'); ?>"><strong>Resume</strong></a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo site_url('home/profile'); ?>"><strong>Profile</strong></a></li>
 
             <!-- Dropdown -->
@@ -97,7 +106,7 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="<?php echo site_url('home/vemailmodal'); ?>">Send Via Email</a>
-                    <a class="dropdown-item" href="<?php echo site_url('home/sendw'); ?>">Send Via WhatsApp</a>
+                    <a class="dropdown-item" href="<?php echo site_url('home/sendsms'); ?>">Send Via SMS</a>
 
                 </div>
             </li>

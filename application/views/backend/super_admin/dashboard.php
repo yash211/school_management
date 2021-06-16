@@ -20,7 +20,7 @@
 
         <div class="tile-stats tile-red">
             <div class="icon"><i class="fa fa-group"></i></div>
-            <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('student'); ?>" data-postfix="" data-duration="1500" data-delay="0">0</div>
+            <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('student'); ?>" data-postfix="" data-duration="1500" data-delay="0"><?php echo $this->db->count_all('student'); ?></div>
 
             <h3><?php echo get_phrase('student'); ?></h3>
             <p>Total students</p>
@@ -40,18 +40,23 @@
     </div>
     <div class="col-md-12">
 
-        <div class="tile-stats tile-blue">
-            <div class="icon"><i class="entypo-chart-bar"></i></div>
-            <?php
-            $check   =   array('timestamp' => strtotime(date('Y-m-d')), 'status' => '1');
-            $query = $this->db->get_where('attendance', $check);
-            $present_today      =   $query->num_rows();
-            ?>
-            <div class="num" data-start="0" data-end="<?php //echo $present_today;
-                                                        ?>" data-postfix="" data-duration="500" data-delay="0">0</div>
+        <div class="tile-stats tile-green">
+            <div class="icon"><i class="entypo-user"></i></div>
+            <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('librarian'); ?>" data-postfix="" data-duration="500" data-delay="0"><?php echo $this->db->count_all('librarian'); ?></div>
 
-            <h3><?php echo get_phrase('attendance'); ?></h3>
-            <p>Total present student today</p>
+            <h3><?php echo get_phrase('librarains'); ?></h3>
+            <p>Total Librarians</p>
+        </div>
+
+    </div>
+    <div class="col-md-12">
+
+        <div class="tile-stats tile-orange">
+            <div class="icon"><i class="entypo-user"></i></div>
+            <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('librarian'); ?>" data-postfix="" data-duration="500" data-delay="0"><?php echo $this->db->count_all('parent'); ?></div>
+
+            <h3><?php echo get_phrase('parent'); ?></h3>
+            <p>Total Parents</p>
         </div>
 
     </div>

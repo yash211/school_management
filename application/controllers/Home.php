@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
+use Twilio\Rest\Client;
 /*
  *  @author   : Creativeitem
  *  date      : April, 2019
@@ -7,6 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *  http://codecanyon.net/user/Creativeitem
  *  http://support.creativeitem.com
  */
+
 class Home extends CI_Controller
 {
 
@@ -26,9 +29,10 @@ class Home extends CI_Controller
   // default function
   public function index()
   {
-    $page_data['page_name']  = 'home';
+    $page_data['page_name']  = 'new_home';
     $page_data['page_title'] = get_phrase('home');
-    $this->load->view('frontend/' . $this->theme . '/index', $page_data);
+    //$this->load->view('frontend/' . $this->theme . '/index', $page_data);
+    $this->load->view('frontend/ultimate/new_home');
   }
 
   function viewusersign()
@@ -96,6 +100,7 @@ class Home extends CI_Controller
   //superuser login
   function superuser_login()
   {
+
     $email = $this->input->post('email');
     $password = $this->input->post('password');
     $require = array('email' => $email, 'password' => $password);
@@ -156,7 +161,8 @@ class Home extends CI_Controller
   }
 
   //etutor dashboard
-  function viewedash(){
+  function viewedash()
+  {
     if ($this->session->has_userdata('email') == FALSE) {
       $this->ecomlogout();
     }
@@ -193,9 +199,9 @@ class Home extends CI_Controller
     if ($this->session->has_userdata('email') == FALSE) {
       $this->ecomlogout();
     }
-    
+
     $page_data['page_title'] = get_phrase('Join Class');
-    
+
     $page_data['page_name'] = 'etutor_joinclass';
     $this->load->view('frontend/ultimate/sindex', $page_data);
   }
@@ -220,24 +226,26 @@ class Home extends CI_Controller
 
   function class_subject()
   {
-    $class_name = $this->session->userdata('class_code');
+    $tquery = $this->db->get_where('etutor_student', array('email' => $this->session->userdata('email')))->row()->class_name;
+    //echo $tquery;
+    //$class_name = $this->session->userdata('class_code');
     $this->db->select('*');
     $this->db->from('etutor_subject');
-    $this->db->where('class_name', $class_name);
+    $this->db->where('class_name', $tquery);
     $q = $this->db->get()->result_array();
     //print_r($q);
     //echo "\n";
     //echo $q[0]['name'];
-    //$page_data['name'] = $q['name'];
-    print_r($q);
-    //$page_data['desc'] = $q['description'];
-    //$page_data['file_name'] = $q['file_name'];
-    //$page_data['page_name']  = 'etutor_subjects';
-    /*$page_data['page_title'] = get_phrase('Subjects');
+    $page_data['name'] = $q[0]['name'];
+    //print_r($q);
+    $page_data['desc'] = $q[0]['description'];
+    $page_data['file_name'] = $q[0]['file_name'];
+    $page_data['page_name']  = 'etutor_subjects';
+    $page_data['page_title'] = get_phrase('Subjects');
     //print_r($page_data);
     //$this->load->view('frontend/ultimate/' . $page_data['page_name'], $page_data);
     $page_data['page_name'] = 'etutor_subjects';
-    $this->load->view('frontend/ultimate/sindex', $page_data);*/
+    $this->load->view('frontend/ultimate/sindex', $page_data);
   }
 
   function notice_details($notice_id = '')
@@ -416,7 +424,7 @@ class Home extends CI_Controller
     //echo $data['course_id'];
     //$query=$this->db1->get_where('content',array('course_id' => $data['course_id']))->result_array();
     $this->db->select('*');
-    $this->db->from('content');
+    $this->db->from('newecom_content');
     $this->db->where('course_id', $data['course_id']);
     $query = $this->db->get()->result_array();
     $email = $this->session->userdata('sname');
@@ -477,39 +485,83 @@ class Home extends CI_Controller
   {
 
     //echo "rfibhbghubgh";
-    $page_data['page_name']='ecom_dashboard';
-    $this->load->view('frontend/ultimate/sindex',$page_data);
+    $page_data['page_name'] = 'ecom_dashboard';
+    $this->load->view('frontend/ultimate/sindex', $page_data);
   }
 
-  function profile(){
+  function profile()
+  {
     if ($this->session->has_userdata('sname') == "") {
       $this->ecomlogout();
     }
-    $email=$this->session->userdata('sname');
-    $query=$this->db->get('superuser',array('email'=>$email));
-    $page_data['data']=$query->result_array();
-    $page_data['page_name']='profile';
-    $this->load->view('frontend/ultimate/sindex',$page_data);
+    $email = $this->session->userdata('sname');
+    //echo $email;
+    $query = $this->db->get('superuser', array('email' => $email));
+    $stuid = $this->db->get('ecom_user', array('email' => $email))->row()->ecom_id;
+    //echo $stuid;
+    $data=$this->db->get('enroll_course',array('user_id' => $stuid))->row()->course_id;
+    //print_r($data);
+    $page_data['ecourse']=$this->db->get_where('courses',array('course_id' => $data))->row()->name;
+    //print_r($page_data['ecourse']);
+    $page_data['data'] = $query->result_array();
+    $page_data['page_name'] = 'profile';
+    $this->load->view('frontend/ultimate/sindex', $page_data);
   }
 
-  function vemailmodal(){
-    $page_data['page_name']='emailsend';
-    $this->load->view('frontend/ultimate/sindex',$page_data);
+  function vemailmodal()
+  {
+    $page_data['page_name'] = 'emailsend';
+    $this->load->view('frontend/ultimate/sindex', $page_data);
   }
 
-  function sendw(){
-    $page_data['page_name']='sendwhats';
-    $this->load->view('frontend/ultimate/sindex',$page_data);
-  }
   //send code via email
-  function sendecode(){
-    $to=html_escape($this->input->post('email'));
-    $message=html_escape($this->input->post('message'));
-    $from=$this->session->userdata('sname');
-    $refcode=$this->db->get_where('superuser',array('email'=>$from))->row()->ref;
-    $subject='Referrel Code :'.$refcode;
+  function sendecode()
+  {
+    $to = html_escape($this->input->post('email'));
+    $message = html_escape($this->input->post('message'));
+    $from = $this->session->userdata('sname');
+    $refcode = $this->db->get_where('superuser', array('email' => $from))->row()->ref;
+    $subject = 'Referrel Code :' . $refcode;
     $this->Email_model->send_smtp_mail($message, $subject, $to, $from);
-    $this->session->set_flashdata('emailsent',"Email Sent Successfully");
+    $this->session->set_flashdata('emailsent', "Email Sent Successfully");
     $this->vemailmodal();
+  }
+
+  function sendsms()
+  {
+    $page_data['page_name'] = 'sendsms';
+    $this->load->view('frontend/ultimate/sindex', $page_data);
+  }
+
+
+  function send_sms()
+  {
+
+    $to = html_escape($this->input->post('to'));
+    $mess = html_escape($this->input->post('message'));
+    //echo $message;
+    //$from = html_escape($this->input->post('from'));
+    // LOAD TWILIO LIBRARY
+    //require_once(APPPATH . 'libraries/twilio_library/Twilio.php');
+
+
+    $account_sid    = "AC49612b147e145c137b3a736459efccaa";
+    $auth_token     = "38575999f6c4118480829a28b5b78624";
+    $client         = new Client($account_sid, $auth_token);
+
+    /*$client->account->messages->create(array(
+        'To'        => $to,
+        'From'      => $from,
+        'Body'      => "hhj",
+    ));*/
+    $client->messages->create(
+      '+919867897028',
+      array(
+        "from" => "+12248084136",
+        "body" => $mess,
+      )
+    );
+    $this->session->set_flashdata('message_sent', "Message Sent successfully");
+    redirect(site_url('home/sendsms', 'refresh'));
   }
 }

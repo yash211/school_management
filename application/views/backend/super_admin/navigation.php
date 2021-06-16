@@ -17,14 +17,23 @@
 
         <!-- Links -->
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 1</a>
+        <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Profiles
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="<?php echo site_url('superadmin/profile/teacher'); ?>">Teachers</a>
+                    <a class="dropdown-item" href="<?php echo site_url('superadmin/profile/student'); ?>">Students</a>
+                    <a class="dropdown-item" href="<?php echo site_url('superadmin/profile/admin'); ?>">Institute Admins</a>
+                    <a class="dropdown-item" href="<?php echo site_url('superadmin/profile/book'); ?>">Books</a>
+                    <a class="dropdown-item" href="<?php echo site_url('superadmin/profile/librarian'); ?>">Librarian</a>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo site_url('etutor/dashboard'); ?>">E-tutor</a>
             </li>
-            
-             <!-- Dropdown -->
+
+            <!-- Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     Ecommerce
@@ -36,9 +45,13 @@
                     <a class="dropdown-item" href="<?php echo site_url('ecom/createcontent'); ?>">Add Course Content</a>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo site_url('login'); ?>">Institute Login</a>
+            </li>
             <li class="nav-item" style="float:right">
                 <a class="nav-link" href="<?php echo site_url('superadmin/logout'); ?>">Log out</a>
             </li>
+
         </ul>
     </nav>
     <br>

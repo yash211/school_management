@@ -138,3 +138,4 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array('email_model' , 'crud_model' , 'sms_model', 'frontend_model');
+//$config['composer_autoload'] = 'vendor/twilio/autoload.php';
